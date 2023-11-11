@@ -6,16 +6,29 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-surrealdb = { version = "1", features = ["kv-mem"] }
+# -- Web
 axum = { version = "0.6", features = ["headers"] }
 tokio = { version = "1.0", features = ["full"] }
+tower-http = { version = "0.4", features = ["cors", "fs"] }
+tower-cookies = "0.9"
+
+# -- Tracing
 tracing = "0.1"
-tracing-subscriber = "0.3"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# -- Json
 serde = { version = "1.0.1", features = ["derive"] }
 serde_json = "1.0"
-tower-http = { version = "0.4", features = ["cors"] }
-dotenvy = "0.15"
+serde_with = "3"
 
+# -- Other
+dotenvy = "0.15"
+lazy-regex = "3"
+async-trait = "0.1"
+strum_macros = "0.25"
+uuid = { version = "1", features = ["v4", "fast-rng"] }
+
+# -- Data
+surrealdb = { version = "1", features = ["kv-mem"] }
 
 [dev-dependencies]
 anyhow = "1"
