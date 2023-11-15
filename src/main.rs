@@ -2,6 +2,7 @@
 
 mod config;
 mod ctx;
+mod database;
 mod error;
 mod log;
 mod model;
@@ -22,7 +23,7 @@ use axum::extract::{Path, Query};
 use axum::http::{Method, Uri};
 use axum::response::{Html, IntoResponse, Response};
 use axum::routing::{get, get_service};
-use axum::{middleware, Json, Router};
+use axum::{middleware, Extension, Json, Router};
 use ctx::Ctx;
 use rapi::run;
 use serde::{Deserialize, Serialize};
@@ -53,6 +54,10 @@ async fn main() -> Result<()> {
     let routes_apis = web::routes_tickets::routes(mc.clone())
         .route_layer(middleware::from_fn(web::mw_auth::mw_require_auth));
 
+    let db = database::database::Database::intit()
+        .await
+        .expect("error connecting to database");
+
     let routes_all = Router::new()
         .merge(routes_hello())
         .merge(web::routes_login::routes())
@@ -63,6 +68,7 @@ async fn main() -> Result<()> {
             web::mw_auth::mw_ctx_resolver,
         ))
         .layer(CookieManagerLayer::new())
+        .layer(db)
         .fallback_service(routes_static());
 
     let port: u16 = 9000;
