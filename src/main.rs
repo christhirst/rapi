@@ -6,13 +6,14 @@ mod database;
 mod error;
 mod log;
 mod model;
-mod web;
+mod models;
+pub mod web;
 
 //#[cfg(test)] //Commented during early development
 pub mod _dev_utils;
 
 use crate::log::log_request;
-use crate::model::ModelController;
+use crate::models::ModelController;
 pub use config::config;
 
 pub use self::error::{Error, Result};
@@ -68,7 +69,7 @@ async fn main() -> Result<()> {
             web::mw_auth::mw_ctx_resolver,
         ))
         .layer(CookieManagerLayer::new())
-        .layer(db)
+        .layer(Extension(db))
         .fallback_service(routes_static());
 
     let port: u16 = 9000;

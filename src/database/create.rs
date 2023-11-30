@@ -1,8 +1,7 @@
 use serde::{Deserialize, Serialize};
 use surrealdb::engine::local::Db;
-use surrealdb::Surreal;
 use surrealdb::sql::Thing;
-
+use surrealdb::Surreal;
 
 #[derive(Debug, Serialize)]
 struct Name<'a> {
@@ -22,7 +21,7 @@ struct Record {
     id: Thing,
 }
 
-pub async fn create_person(db: Surreal<Db>) -> Result<Vec<Record>, surrealdb::Error> {
+/* pub async fn create_person(db: Surreal<Db>) -> Result<Vec<Record>, surrealdb::Error> {
     let created= db
         .create("person")
         .content(Person {
@@ -35,7 +34,6 @@ pub async fn create_person(db: Surreal<Db>) -> Result<Vec<Record>, surrealdb::Er
         })
         .await;
     created
-    
-} 
 
-
+}
+ */

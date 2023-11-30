@@ -1,4 +1,4 @@
-use crate::{ctx::Ctx, model::ModelController, Error, Result};
+use crate::{ctx::Ctx, models::ModelController, Error, Result};
 use async_trait::async_trait;
 use axum::{
     extract::{FromRequestParts, State},

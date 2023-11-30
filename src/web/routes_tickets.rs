@@ -7,7 +7,7 @@ use axum::{
 
 use crate::{
     error,
-    model::{ModelController, Ticket, TicketForCreate},
+    models::{ModelController, Ticket, TicketForCreate},
 };
 
 pub fn routes(mc: ModelController) -> Router {

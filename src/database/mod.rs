@@ -1,3 +1,3 @@
-mod create;
+pub mod create;
 // db.rs
 pub mod database;

@@ -1,5 +1,5 @@
 use std::net::SocketAddr;
-mod database;
+//mod database;
 mod routes;
 use serde::{Deserialize, Serialize};
 use surrealdb::engine::local::Mem;
